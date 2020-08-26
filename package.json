@@ -50,6 +50,9 @@
     }
   },
   "lint-staged": {
-    "src/*": "qqq"
+    "src/**/*.{js,vue}": [
+       "eslint .js,.vue",
+       "git add"
+    ]
   }
 }
