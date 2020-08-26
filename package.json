@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "pre-commit": "vue-cli-service lint && git add"
   },
   "dependencies": {
     "axios": "^0.20.0",
@@ -46,13 +47,7 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
+      "pre-commit": "npm run pre-commit"
     }
-  },
-  "lint-staged": {
-    "*": [
-      "vue-cli-service lint",
-      "git add"
-    ]
   }
 }
