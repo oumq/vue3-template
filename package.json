@@ -45,15 +45,13 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
     }
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
   },
   "lint-staged": {
     "src/**/*.{js,vue}": [
-      "npm run lint",
+      "vue-cli-service lint",
       "git add"
     ]
   }
