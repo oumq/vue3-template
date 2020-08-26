@@ -50,6 +50,6 @@
     }
   },
   "lint-staged": {
-    "*.{js,css,ts,vue,scss}": "prettier --write"
+    "*.{js,vue}": "vue-cli-service lint"
   }
 }
