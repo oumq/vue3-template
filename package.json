@@ -50,6 +50,6 @@
     }
   },
   "lint-staged": {
-    "*.{js,vue}": "vue-cli-service lint"
+    "src/**/*.{js,vue}": "qqq"
   }
 }
