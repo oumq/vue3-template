@@ -15,7 +15,7 @@ module.exports = {
   devServer: {
     port: port,
     overlay: {
-      warnings: false,
+      warnings: true,
       errors: true
     },
     proxy: {
@@ -43,5 +43,11 @@ module.exports = {
       }
     },
     devtool: 'source-map'
+  },
+  pwa: {
+    workboxOptions: {
+      skipWaiting: true,
+      clientsClaim: true
+    }
   }
 }
