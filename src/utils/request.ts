@@ -6,8 +6,9 @@ import axios, {
 } from 'axios'
 
 import NProgress from 'nprogress'
-
 import 'nprogress/nprogress.css'
+
+import { notification } from 'ant-design-vue'
 
 interface CodeMessageType {
   [code: number]: string
@@ -70,17 +71,17 @@ class Request {
   private errorHandler(error: AxiosError) {
     const { response } = error
     if (response && response.status) {
-      // const { status, statusText } = response
-      // const errorText = this.codeMessage[status] || statusText
-      // notification.error({
-      //   message: `请求错误 ${status}`,
-      //   description: errorText
-      // })
+      const { status, statusText } = response
+      const errorText = this.codeMessage[status] || statusText
+      notification.error({
+        message: `请求错误 ${status}`,
+        description: errorText
+      })
     } else if (!response) {
-      // notification.error({
-      //   description: '您的网络发生异常，无法连接服务器',
-      //   message: '网络异常'
-      // })
+      notification.error({
+        description: '您的网络发生异常，无法连接服务器',
+        message: '网络异常'
+      })
     }
     return Promise.reject(error)
   }
