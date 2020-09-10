@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 
 import 'normalize.css/normalize.css'
+console.log(process.env.VUE_APP_BASE_API)
 
 createApp(App)
   .use(store)
