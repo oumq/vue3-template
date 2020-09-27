@@ -1,8 +1,22 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <router-view v-slot="{ Component }">
+    <transition name="fade">
+      <component :is="Component" />
+    </transition>
+  </router-view>
 </template>
+
+<script lang="ts">
+import { defineComponent, onMounted } from 'vue'
+
+export default defineComponent({
+  setup() {
+    onMounted(() => {
+      console.log('aaa')
+    })
+  }
+})
+</script>
 
 <style lang="scss">
 #app {
