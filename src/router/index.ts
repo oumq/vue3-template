@@ -9,19 +9,25 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'header',
         name: 'header',
-        component: () => import('@/layout/components/MyHeader.vue')
+        component: () =>
+          import(
+            /* webpackChunkName: "myHeader" */ '@/layout/components/MyHeader.vue'
+          )
       },
       {
         path: 'footer',
         name: 'footer',
-        component: () => import('@/layout/components/MyFooter.vue')
+        component: () =>
+          import(
+            /* webpackChunkName: "myFooter" */ '@/layout/components/MyFooter.vue'
+          )
       }
     ]
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import('@/views/Login.vue')
+    component: () => import(/* webpackChunkName: "login" */ '@/views/Login.vue')
   }
 ]
 

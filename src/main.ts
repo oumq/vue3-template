@@ -10,9 +10,14 @@ import 'normalize.css/normalize.css'
 
 const app = createApp(App)
 
-setTimeout(() => {
-  app
-    .use(store)
-    .use(router)
-    .mount('#app')
-}, 2000)
+// setTimeout(() => {
+//   app
+//     .use(store)
+//     .use(router)
+//     .mount('#app')
+// }, 2000)
+
+app
+  .use(store)
+  .use(router)
+  .mount('#app')
