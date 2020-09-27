@@ -56,22 +56,24 @@ module.exports = {
         '@': resolve('src')
       }
     },
-    devtool: 'source-map',
-    plugins:
-      process.env.NODE_ENV === 'production'
-        ? [
-            new CompressionWebpackPlugin({
-              filename: '[path].gz[query]',
-              algorithm: 'gzip',
-              test: new RegExp(
-                '\\.(' + productionGzipExtensions.join('|') + ')$'
-              ), // 匹配文件名
-              threshold: 1024, // 对1K以上的数据进行压缩
-              minRatio: 0.8,
-              deleteOriginalAssets: false // 是否删除源文件
-            })
-          ]
-        : []
+    devtool: 'source-map'
+  },
+  chainWebpack: config => {
+    config.plugins.delete('preload')
+    config.plugins.delete('prefetch')
+    // gzip
+    config.when(process.env.NODE_ENV === 'production', config => {
+      config.plugin('compressionWebpackPlugin').use(
+        new CompressionWebpackPlugin({
+          filename: '[path].gz[query]',
+          algorithm: 'gzip',
+          test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'), // 匹配文件名
+          threshold: 1024, // 对1K以上的数据进行压缩
+          minRatio: 0.8,
+          deleteOriginalAssets: false // 是否删除源文件
+        })
+      )
+    })
   },
   pwa: {
     workboxOptions: {

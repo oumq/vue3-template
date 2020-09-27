@@ -5,29 +5,24 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Layout',
     component: () => import('@/layout/index.vue'),
+    redirect: '/header',
     children: [
       {
         path: 'header',
         name: 'header',
-        component: () =>
-          import(
-            /* webpackChunkName: "myHeader" */ '@/layout/components/MyHeader.vue'
-          )
+        component: () => import('@/layout/components/MyHeader.vue')
       },
       {
         path: 'footer',
         name: 'footer',
-        component: () =>
-          import(
-            /* webpackChunkName: "myFooter" */ '@/layout/components/MyFooter.vue'
-          )
+        component: () => import('@/layout/components/MyFooter.vue')
       }
     ]
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "login" */ '@/views/Login.vue')
+    component: () => import('@/views/Login.vue')
   }
 ]
 
