@@ -12,7 +12,7 @@ import { defineComponent, onMounted } from 'vue'
 export default defineComponent({
   setup() {
     onMounted(() => {
-      console.log('aaa')
+      console.log('app-onMounted')
     })
   }
 })
@@ -24,6 +24,7 @@ export default defineComponent({
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  // color: #2c3e50;
+  color: $color-text-primary;
 }
 </style>

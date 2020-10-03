@@ -1,20 +1,26 @@
 <template>
-  <!-- <a-layout>
+  <a-layout class="my-layout">
     <my-header />
-  </a-layout>-->
-  <router-view></router-view>
+  </a-layout>
+  <!-- <router-view></router-view> -->
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-// import MyHeader from './components/MyHeader.vue'
-// import { Layout } from 'ant-design-vue'
+import MyHeader from './components/MyHeader.vue'
+import { Layout } from 'ant-design-vue'
 
 export default defineComponent({
-  name: 'Layout'
-  // components: {
-  //   ALayout: Layout,
-  //   MyHeader: MyHeader
-  // }
+  name: 'Layout',
+  components: {
+    ALayout: Layout,
+    MyHeader: MyHeader
+  }
 })
 </script>
+
+<style lang="scss" scoped>
+.my-layout {
+  background: #ffffff;
+}
+</style>
