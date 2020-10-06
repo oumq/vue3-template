@@ -8,11 +8,15 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   setup() {
+    const $store = useStore()
     onMounted(() => {
-      console.log('app-onMounted')
+      window.onresize = () => {
+        $store.dispatch('app/setClientWidth', document.body.clientWidth)
+      }
     })
   }
 })

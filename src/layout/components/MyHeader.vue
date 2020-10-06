@@ -48,8 +48,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue'
-// import { useRouter } from 'vue-router'
+import { defineComponent, ref, computed } from 'vue'
+import { useStore } from 'vuex'
 import { Layout, Input, Dropdown, Menu } from 'ant-design-vue'
 import { SearchOutlined, UnorderedListOutlined } from '@ant-design/icons-vue'
 
@@ -65,7 +65,10 @@ export default defineComponent({
     UnorderedListOutlined
   },
   setup() {
-    const clientWidth = ref(document.body.clientWidth)
+    const $store = useStore()
+    const clientWidth = computed(() => {
+      return $store.state.app.clientWidth
+    })
     const activeTab = ref('design')
     const tabList = [
       { id: 'design', name: '设计', link: '/front' },
@@ -77,12 +80,6 @@ export default defineComponent({
     const submenuClick = (id: string) => {
       activeTab.value = id
     }
-
-    onMounted(() => {
-      window.onresize = () => {
-        clientWidth.value = document.body.clientWidth
-      }
-    })
 
     return {
       clientWidth,
