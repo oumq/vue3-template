@@ -14,6 +14,7 @@ export default defineComponent({
   setup() {
     const $store = useStore()
     onMounted(() => {
+      $store.dispatch('app/setClientWidth', document.body.clientWidth)
       window.onresize = () => {
         $store.dispatch('app/setClientWidth', document.body.clientWidth)
       }
