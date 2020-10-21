@@ -12,7 +12,13 @@
         </a-input>
       </div>
       <ul class="header-menu">
-        <template v-if="clientWidth >= 760">
+        <template
+          v-if="
+            screen === ScreenEnum.LG ||
+              screen === ScreenEnum.XL ||
+              screen === ScreenEnum.XXL
+          "
+        >
           <li
             :class="[
               'header-submenu',
@@ -21,13 +27,12 @@
             :key="item.link"
             v-for="item in tabList"
             @click="submenuClick(item.id)"
+            >{{ item.name }}</li
           >
-            {{ item.name }}
-          </li>
         </template>
 
         <a-dropdown
-          v-if="clientWidth < 760"
+          v-else
           placement="bottomRight"
           overlayClassName="header-dropdown"
         >
@@ -36,9 +41,9 @@
           </li>
           <template v-slot:overlay>
             <a-menu>
-              <a-menu-item v-for="item in tabList" :key="item.link">
-                {{ item.name }}
-              </a-menu-item>
+              <a-menu-item v-for="item in tabList" :key="item.link">{{
+                item.name
+              }}</a-menu-item>
             </a-menu>
           </template>
         </a-dropdown>
@@ -49,9 +54,12 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
-import { useStore } from 'vuex'
 import { Layout, Input, Dropdown, Menu } from 'ant-design-vue'
 import { SearchOutlined, UnorderedListOutlined } from '@ant-design/icons-vue'
+
+import { appStore } from '@/store/modules/app'
+
+import { ScreenEnum } from '@/enums/appEnum'
 
 export default defineComponent({
   name: 'MyHeader',
@@ -65,11 +73,10 @@ export default defineComponent({
     UnorderedListOutlined
   },
   setup() {
-    const $store = useStore()
-    const clientWidth = computed(() => {
-      return $store.state.app.clientWidth
-    })
     const activeTab = ref('design')
+    const screen = computed(() => {
+      return appStore.getScreen
+    })
     const tabList = [
       { id: 'design', name: '设计', link: '/front' },
       { id: 'document', name: '文档', link: '/back' },
@@ -82,7 +89,8 @@ export default defineComponent({
     }
 
     return {
-      clientWidth,
+      screen,
+      ScreenEnum,
       tabList,
       activeTab,
       submenuClick

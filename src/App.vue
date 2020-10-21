@@ -8,15 +8,14 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { appStore } from '@/store/modules/app'
 
 export default defineComponent({
   setup() {
-    const $store = useStore()
     onMounted(() => {
-      $store.dispatch('app/setClientWidth', document.body.clientWidth)
+      appStore.setScreen(document.body.clientWidth)
       window.onresize = () => {
-        $store.dispatch('app/setClientWidth', document.body.clientWidth)
+        appStore.setScreen(document.body.clientWidth)
       }
     })
   }

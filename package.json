@@ -48,7 +48,8 @@
     "prettier": "^1.19.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
-    "typescript": "~3.9.3"
+    "typescript": "~3.9.3",
+    "vuex-module-decorators": "^1.0.1"
   },
   "husky": {
     "hooks": {

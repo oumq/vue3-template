@@ -1,31 +1,54 @@
-import { ActionContext } from 'vuex'
+import store from '@/store'
+import { hotModuleUnregisterModule } from '@/utils/helper/vuexHelper'
 
-export interface AppState {
-  clientWidth?: number
-}
+import {
+  Module,
+  VuexModule,
+  getModule,
+  Mutation,
+  Action
+} from 'vuex-module-decorators'
 
-const state: AppState = {
-  clientWidth: 0
-}
+import { ScreenEnum, ScreenSizeEnum } from '@/enums/appEnum'
 
-const mutations = {
-  SET_CLIENTWIDTH: (state: AppState, clientWidth: number) => {
-    state.clientWidth = clientWidth
-  }
-}
-
-const actions = {
-  setClientWidth(
-    context: ActionContext<AppState, AppState>,
-    clientWidth: number
-  ) {
-    context.commit('SET_CLIENTWIDTH', clientWidth)
-  }
-}
-
-export default {
+const NAME = 'app'
+hotModuleUnregisterModule(NAME)
+@Module({
+  dynamic: true,
   namespaced: true,
-  state,
-  mutations,
-  actions
+  stateFactory: true,
+  store,
+  name: NAME
+})
+class App extends VuexModule {
+  private screen: ScreenEnum = ScreenEnum.XXL
+
+  get getScreen() {
+    return this.screen
+  }
+
+  @Mutation
+  commitScreenSize(clientWidth: number): void {
+    if (clientWidth < ScreenSizeEnum.XS) {
+      this.screen = ScreenEnum.XS
+    } else if (clientWidth < ScreenSizeEnum.SM) {
+      this.screen = ScreenEnum.SM
+    } else if (clientWidth < ScreenSizeEnum.MD) {
+      this.screen = ScreenEnum.MD
+    } else if (clientWidth < ScreenSizeEnum.LG) {
+      this.screen = ScreenEnum.LG
+    } else if (clientWidth < ScreenSizeEnum.XL) {
+      this.screen = ScreenEnum.XL
+    } else {
+      this.screen = ScreenEnum.XXL
+    }
+  }
+
+  @Action
+  public async setScreen(clientWidth: number) {
+    this.commitScreenSize(clientWidth)
+  }
 }
+
+export { App }
+export const appStore = getModule<App>(App)

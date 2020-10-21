@@ -1,10 +1,8 @@
 import { createStore } from 'vuex'
-import app from './modules/app'
-// import getters from './getters'
+import { config } from 'vuex-module-decorators'
+
+config.rawError = true
 
 export default createStore({
-  modules: {
-    app
-    // getters
-  }
+  modules: {}
 })

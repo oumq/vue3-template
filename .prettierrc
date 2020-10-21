@@ -2,8 +2,9 @@
   "singleQuote": true,
   "semi": false,
   "bracketSpacing": true,
-  "htmlWhitespaceSensitivity": "ignore",
+  "htmlWhitespaceSensitivity": "strict",
   "trailingComma": "none",
   "arrowParens": "avoid",
-  "endOfLine": "auto"
+  "proseWrap": "never",
+  "endOfLine": "lf"
 }
