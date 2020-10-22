@@ -1,3 +1,24 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### 0.1.1 (2020-10-22)
+
+
+### Features
+
+* :construction: 增加瀑布流页面 c7fce96
+* :sparkles: 增加头部导航栏 2ae10c7
+* :sparkles: 预渲染增加与测试 1aef41b
+* 增加瀑布流，usehook实践 16eba28
+
+
+### Bug Fixes
+
+* :art: 导航栏监听使用vuex 985862b
+* :wrench: 配置修改 85eea03
+* :wrench: 配置修改 3429fa3
+
 # 0.1.0 (2020-10-22)
 
 
@@ -25,6 +46,3 @@
 ### Reverts
 
 * Revert "mytest" e9fa233
-
-
-
