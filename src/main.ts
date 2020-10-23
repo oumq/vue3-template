@@ -10,8 +10,6 @@ import 'normalize.css/normalize.css'
 
 const app = createApp(App)
 
-console.log('test')
-
 app
   .use(store)
   .use(router)
