@@ -7,16 +7,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 import { appStore } from '@/store/modules/app'
+import {
+  tryOnMounted,
+  useWindowSize,
+  useEventListener,
+  useThrottleFn
+} from '@vueuse/core'
 
 export default defineComponent({
   setup() {
-    onMounted(() => {
-      appStore.setScreen(document.body.clientWidth)
-      window.onresize = () => {
-        appStore.setScreen(document.body.clientWidth)
-      }
+    tryOnMounted(() => {
+      const { width } = useWindowSize()
+      appStore.setScreen(width.value)
+      useEventListener(
+        'resize',
+        useThrottleFn(() => {
+          appStore.setScreen(width.value)
+        }, 300)
+      )
     })
   }
 })
