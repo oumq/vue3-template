@@ -57,7 +57,7 @@ class Request {
     this.instance.interceptors.response.use(
       (response: AxiosResponse) => {
         NProgress.done()
-        console.log(response)
+        // console.log(response)
         return response
       },
       (error: AxiosError) => {
