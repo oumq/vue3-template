@@ -13,6 +13,13 @@ const port = process.env.port || process.env.npm_config_port || 9528 // dev port
 const glob = require('glob-all')
 const PurgecssPlugin = require('purgecss-webpack-plugin')
 
+class Extractor {
+  static extract(content) {
+    const validSection = content.replace(/<style([\s\S]*?)<\/style>+/gim, '')
+    return validSection.match(/[A-Za-z0-9-_/:]*[A-Za-z0-9-_/]+/g) || []
+  }
+}
+
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   outputDir: 'dist',
@@ -95,17 +102,7 @@ module.exports = {
         paths: glob.sync([resolve('./**/*.vue')]),
         extractors: [
           {
-            extractor: class Extractor {
-              static extract(content) {
-                const validSection = content.replace(
-                  /<style([\s\S]*?)<\/style>+/gim,
-                  ''
-                )
-                return (
-                  validSection.match(/[A-Za-z0-9-_/:]*[A-Za-z0-9-_/]+/g) || []
-                )
-              }
-            },
+            extractor: new Extractor(),
             extensions: ['html', 'vue']
           }
         ],
