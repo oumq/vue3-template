@@ -41,9 +41,9 @@
           </li>
           <template v-slot:overlay>
             <a-menu>
-              <a-menu-item v-for="item in tabList" :key="item.link">
-                {{ item.name }}
-              </a-menu-item>
+              <a-menu-item v-for="item in tabList" :key="item.link">{{
+                item.name
+              }}</a-menu-item>
             </a-menu>
           </template>
         </a-dropdown>
