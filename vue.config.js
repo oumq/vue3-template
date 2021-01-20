@@ -74,6 +74,18 @@ module.exports = {
         })
       )
     })
+
+    config.optimization.splitChunks({
+      chunks: 'all',
+      cacheGroups: {
+        libs: {
+          name: 'chunk-libs',
+          chunks: 'initial', // only package third parties that are initially dependent
+          test: /[\\/]node_modules[\\/]/,
+          priority: 10
+        }
+      }
+    })
   },
   pwa: {
     workboxOptions: {
