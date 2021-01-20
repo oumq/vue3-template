@@ -17,21 +17,14 @@ jobs:
         with:
           node-version: '12.20.1'
 
+      - name: Install Yarn
+        run: npm install -g yarn
+
       - name: Install npm dependencies
-        uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: install # will run `yarn install` command
+        run: yarn install
 
       - name: Run build task
-        uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: build # will run `yarn build` command
-
-      # - name: Install npm dependencies
-      #   run: npm install
-
-      # - name: Run build task
-      #   run: npm run build
+        run: yarn build
 
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v2.1.1
