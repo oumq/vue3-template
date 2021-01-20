@@ -10,6 +10,9 @@ const resolve = dir => {
 
 const port = process.env.port || process.env.npm_config_port || 9528 // dev port
 
+const glob = require('glob-all')
+const PurgecssPlugin = require('purgecss-webpack-plugin')
+
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   outputDir: 'dist',
@@ -86,6 +89,36 @@ module.exports = {
         }
       }
     })
+
+    config.plugin('purgecss-webpack-plugin').use(
+      new PurgecssPlugin({
+        paths: glob.sync([resolve('./**/*.vue')]),
+        extractors: [
+          {
+            extractor: class Extractor {
+              static extract(content) {
+                const validSection = content.replace(
+                  /<style([\s\S]*?)<\/style>+/gim,
+                  ''
+                )
+                return (
+                  validSection.match(/[A-Za-z0-9-_/:]*[A-Za-z0-9-_/]+/g) || []
+                )
+              }
+            },
+            extensions: ['html', 'vue']
+          }
+        ],
+        whitelist: ['html', 'body'],
+        whitelistPatterns: [
+          /ant-.*/,
+          /-(leave|enter|appear)(|-(to|from|active))$/,
+          /^(?!cursor-move).+-move$/,
+          /^router-link(|-exact)-active$/
+        ],
+        whitelistPatternsChildren: [/^token/, /^pre/, /^code/]
+      })
+    )
   },
   pwa: {
     workboxOptions: {
