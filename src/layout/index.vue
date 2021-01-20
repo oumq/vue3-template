@@ -3,7 +3,6 @@
     <my-header />
     <my-content />
   </a-layout>
-  <!-- <router-view></router-view> -->
 </template>
 
 <script lang="ts">

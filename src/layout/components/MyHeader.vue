@@ -26,7 +26,7 @@
             ]"
             :key="item.link"
             v-for="item in tabList"
-            @click="submenuClick(item.id)"
+            @click="submenuClick(item)"
             >{{ item.name }}</li
           >
         </template>
@@ -41,9 +41,9 @@
           </li>
           <template v-slot:overlay>
             <a-menu>
-              <a-menu-item v-for="item in tabList" :key="item.link">{{
-                item.name
-              }}</a-menu-item>
+              <a-menu-item v-for="item in tabList" :key="item.link">
+                {{ item.name }}
+              </a-menu-item>
             </a-menu>
           </template>
         </a-dropdown>
@@ -56,6 +56,8 @@
 import { defineComponent, ref, computed } from 'vue'
 import { Layout, Input, Dropdown, Menu } from 'ant-design-vue'
 import { SearchOutlined, UnorderedListOutlined } from '@ant-design/icons-vue'
+
+import { useRouter } from 'vue-router'
 
 import { appStore } from '@/store/modules/app'
 
@@ -73,19 +75,21 @@ export default defineComponent({
     UnorderedListOutlined
   },
   setup() {
+    const router = useRouter()
     const activeTab = ref('design')
     const screen = computed(() => {
       return appStore.getScreen
     })
     const tabList = [
-      { id: 'design', name: '设计', link: '/front' },
-      { id: 'document', name: '文档', link: '/back' },
-      { id: 'component', name: '组件', link: '/db' },
-      { id: 'resource', name: '资源', link: '/introduction' }
+      { id: 'design', name: '设计', link: '/drawBoard' },
+      { id: 'document', name: '文档', link: '/waterfall' },
+      { id: 'component', name: '组件', link: '/wordCloud' },
+      { id: 'resource', name: '资源', link: '/wordCloud' }
     ]
 
-    const submenuClick = (id: string) => {
-      activeTab.value = id
+    const submenuClick = (item: any) => {
+      activeTab.value = item.id
+      router.push(item.link)
     }
 
     return {
@@ -103,7 +107,6 @@ export default defineComponent({
 .my-header {
   box-sizing: border-box;
   background: #fff;
-  // box-shadow: 0 2px 8px #f0f1f2;
   padding: 0;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   .header-wrapper {
@@ -114,18 +117,18 @@ export default defineComponent({
     .header-logo {
       box-sizing: border-box;
       flex-basis: 120px;
-      height: 64px;
+      display: flex;
+      justify-content: center;
       img {
         height: 40px;
       }
     }
     .header-seach {
       flex: 1;
-      ::v-deep .ant-input {
+      display: flex;
+      ::v-deep(.ant-input-affix-wrapper) {
         border: 0;
         max-width: 200px;
-      }
-      ::v-deep .ant-input:focus {
         box-shadow: 0 0 0 0;
       }
     }
@@ -134,6 +137,7 @@ export default defineComponent({
       list-style: none;
       margin: 0;
       padding: 0;
+      height: 64px;
       .header-submenu {
         position: relative;
         box-sizing: border-box;

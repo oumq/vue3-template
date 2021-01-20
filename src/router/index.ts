@@ -4,20 +4,25 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Layout',
-    component: () => import('@/layout/index.vue')
-    // redirect: '/header',
-    // children: [
-    //   {
-    //     path: 'header',
-    //     name: 'header',
-    //     component: () => import('@/layout/components/MyHeader.vue')
-    //   },
-    //   {
-    //     path: 'footer',
-    //     name: 'footer',
-    //     component: () => import('@/layout/components/MyFooter.vue')
-    //   }
-    // ]
+    component: () => import('@/layout/index.vue'),
+    redirect: '/drawBoard',
+    children: [
+      {
+        path: 'drawBoard',
+        name: 'drawBoard',
+        component: () => import('@/views/drawBoard/index.vue')
+      },
+      {
+        path: 'waterfall',
+        name: 'waterfall',
+        component: () => import('@/components/Waterfall/index.vue')
+      },
+      {
+        path: 'wordCloud',
+        name: 'wordCloud',
+        component: () => import('@/components/WordCloud/index.vue')
+      }
+    ]
   },
   {
     path: '/login',

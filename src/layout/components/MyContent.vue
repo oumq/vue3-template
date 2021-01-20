@@ -2,7 +2,8 @@
   <a-layout-content class="my-layout">
     <section class="layout-wrapper">
       <!-- <Waterfall /> -->
-      <WordCloud />
+      <!-- <WordCloud /> -->
+      <router-view></router-view>
     </section>
   </a-layout-content>
 </template>
@@ -10,15 +11,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 // import Waterfall from '@/components/Waterfall/index.vue'
-import WordCloud from '@/components/WordCloud/index.vue'
+// import WordCloud from '@/components/WordCloud/index.vue'
 import { Layout } from 'ant-design-vue'
 
 export default defineComponent({
   name: 'MyContent',
   components: {
-    ALayoutContent: Layout.Content,
+    ALayoutContent: Layout.Content
     // Waterfall: Waterfall
-    WordCloud: WordCloud
+    // WordCloud: WordCloud
   }
 })
 </script>
