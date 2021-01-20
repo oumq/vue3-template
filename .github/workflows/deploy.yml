@@ -15,23 +15,13 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '12.20.1'
+          node-version: '12.x'
 
       - name: Install npm dependencies
-        uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: install # will run `yarn install` command
+        run: npm install
 
       - name: Run build task
-        uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: build # will run `yarn build` command
-
-      # - name: Install npm dependencies
-      #   run: npm install
-
-      # - name: Run build task
-      #   run: npm run build
+        run: npm run build
 
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v2.1.1
