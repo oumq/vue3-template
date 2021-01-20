@@ -10,17 +10,26 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'drawBoard',
         name: 'drawBoard',
-        component: () => import('@/views/drawBoard/index.vue')
+        component: () =>
+          import(
+            /* webpackChunkName: "drawBoard" */ '@/views/drawBoard/index.vue'
+          )
       },
       {
         path: 'waterfall',
         name: 'waterfall',
-        component: () => import('@/components/Waterfall/index.vue')
+        component: () =>
+          import(
+            /* webpackChunkName: "waterfall" */ '@/components/Waterfall/index.vue'
+          )
       },
       {
         path: 'wordCloud',
         name: 'wordCloud',
-        component: () => import('@/components/WordCloud/index.vue')
+        component: () =>
+          import(
+            /* webpackChunkName: "wordCloud" */ '@/components/WordCloud/index.vue'
+          )
       }
     ]
   },
