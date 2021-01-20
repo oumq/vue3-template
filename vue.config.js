@@ -95,9 +95,9 @@ module.exports = {
           reuseExistingChunk: true,
           enforce: true
         },
-        elementUI: {
-          name: 'chunk-elementui',
-          test: /[\\/]node_modules[\\/]element-ui[\\/]/,
+        antd: {
+          name: 'chunk-antd',
+          test: /[\\/]node_modules[\\/]ant-design-vue[\\/]/,
           chunks: 'all',
           priority: 3,
           reuseExistingChunk: true,

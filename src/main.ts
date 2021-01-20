@@ -4,7 +4,6 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 // import request from './utils/request'
-import './styles/tailwind.css'
 import './styles/index.scss'
 
 import 'normalize.css/normalize.css'

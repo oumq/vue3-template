@@ -1,5 +1,5 @@
 <template>
-  <div class="box-border w-full min-h-screen"></div>
+  <div>aaa</div>
 </template>
 
 <script lang="ts">
