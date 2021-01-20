@@ -10,16 +10,6 @@ const resolve = dir => {
 
 const port = process.env.port || process.env.npm_config_port || 9528 // dev port
 
-const glob = require('glob-all')
-const PurgecssPlugin = require('purgecss-webpack-plugin')
-
-class Extractor {
-  static extract(content) {
-    const validSection = content.replace(/<style([\s\S]*?)<\/style>+/gim, '')
-    return validSection.match(/[A-Za-z0-9-_/:]*[A-Za-z0-9-_/]+/g) || []
-  }
-}
-
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
   outputDir: 'dist',
@@ -86,36 +76,43 @@ module.exports = {
     })
 
     config.optimization.splitChunks({
-      chunks: 'all',
       cacheGroups: {
-        libs: {
-          name: 'chunk-libs',
-          chunks: 'initial', // only package third parties that are initially dependent
+        common: {
+          name: 'chunk-common',
+          chunks: 'initial',
+          minChunks: 2,
+          maxInitialRequests: 5,
+          minSize: 0,
+          priority: 1,
+          reuseExistingChunk: true,
+          enforce: true
+        },
+        vendors: {
+          name: 'chunk-vendors',
           test: /[\\/]node_modules[\\/]/,
-          priority: 10
+          chunks: 'initial',
+          priority: 2,
+          reuseExistingChunk: true,
+          enforce: true
+        },
+        elementUI: {
+          name: 'chunk-elementui',
+          test: /[\\/]node_modules[\\/]element-ui[\\/]/,
+          chunks: 'all',
+          priority: 3,
+          reuseExistingChunk: true,
+          enforce: true
+        },
+        echarts: {
+          name: 'chunk-echarts',
+          test: /[\\/]node_modules[\\/](vue-)?echarts[\\/]/,
+          chunks: 'all',
+          priority: 4,
+          reuseExistingChunk: true,
+          enforce: true
         }
       }
     })
-
-    config.plugin('purgecss-webpack-plugin').use(
-      new PurgecssPlugin({
-        paths: glob.sync([resolve('./**/*.vue')]),
-        extractors: [
-          {
-            extractor: new Extractor(),
-            extensions: ['html', 'vue']
-          }
-        ],
-        whitelist: ['html', 'body'],
-        whitelistPatterns: [
-          /ant-.*/,
-          /-(leave|enter|appear)(|-(to|from|active))$/,
-          /^(?!cursor-move).+-move$/,
-          /^router-link(|-exact)-active$/
-        ],
-        whitelistPatternsChildren: [/^token/, /^pre/, /^code/]
-      })
-    )
   },
   pwa: {
     workboxOptions: {

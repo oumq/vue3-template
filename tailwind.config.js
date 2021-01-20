@@ -9,6 +9,7 @@ module.exports = {
   //   //   whitelistPatternsChildren: [/ant-.+$/]
   //   // }
   // },
+  purge: false,
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {}
