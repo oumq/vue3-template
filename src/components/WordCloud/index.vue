@@ -34,7 +34,7 @@ export default {
       const arr = []
       const list = res.data
       list.forEach(element => {
-        arr.push([element.hot_content, Number(element.hot_count) / 1000000])
+        arr.push([element.hot_content, Number(element.hot_count) / 7000000])
       })
       setWordCloud(arr)
     })
