@@ -151,6 +151,7 @@ export default defineComponent({
         margin: 0 12px;
         transition: border-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
         cursor: pointer;
+        text-align: center;
         &:hover {
           color: $color-text-primary-active;
           border-top-color: $color-text-primary-active;

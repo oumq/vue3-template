@@ -5,7 +5,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Layout',
     component: () => import('@/layout/index.vue'),
-    redirect: '/drawBoard',
+    redirect: '/remoteTemp',
     children: [
       {
         path: 'drawBoard',
@@ -29,6 +29,14 @@ const routes: Array<RouteRecordRaw> = [
         component: () =>
           import(
             /* webpackChunkName: "wordCloud" */ '@/components/WordCloud/index.vue'
+          )
+      },
+      {
+        path: 'remoteTemp',
+        name: 'remoteTemp',
+        component: () =>
+          import(
+            /* webpackChunkName: "remoteTemp" */ '@/views/remoteTemp/index.vue'
           )
       }
     ]

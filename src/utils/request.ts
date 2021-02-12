@@ -37,7 +37,7 @@ class Request {
 
   constructor() {
     this.instance = axios.create({
-      baseURL: '/api',
+      // baseURL: '/api',
       timeout: 10000
     })
     this.initInterceptors()

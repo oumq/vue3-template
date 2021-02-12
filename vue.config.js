@@ -16,6 +16,7 @@ module.exports = {
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
+  runtimeCompiler: true,
   devServer: {
     port: port,
     overlay: {
@@ -28,6 +29,13 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           '^/api': '/api'
+        }
+      },
+      '/template': {
+        target: 'https://oumq.online',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/template': '/template'
         }
       }
     }
