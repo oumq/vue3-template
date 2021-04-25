@@ -1,3 +1,25 @@
+<!--
+  demo
+  <template>
+    <h1 class="_h1">{{ hello }}</h1>
+  </template>
+
+  <script>
+    export default {
+    data() {
+      return {
+      hello: 'Hello world'
+      }
+      }
+    }
+  </script>
+
+  <style scoped lang="scss">
+    ._h1 {
+    color: red;
+    }
+  </style>
+-->
 <template>
   <div class="remote-temp-wrap">
     <Vue3Codemirror ref="codemirror" class="editor-content" />
